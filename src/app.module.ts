@@ -3,14 +3,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { databaseConfig } from './config/database.config';
-import { AuthModule } from './auth/auth.module';
-import { OrganizationalUnitsModule } from './organizational-units/organizational-units.module';
-import { PermissionsModule } from './permissions/permissions.module';
-import { ProjectsModule } from './projects/projects.module';
-import { RolesModule } from './roles/roles.module';
-import { TransfersModule } from './transfers/transfers.module';
-import { UsersModule } from './users/users.module';
-import { VehiclesModule } from './vehicles/vehicles.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { OrganizationalUnitsModule } from './modules/organizational-units/organizational-units.module';
+import { PermissionsModule } from './modules/permissions/permissions.module';
+import { ProjectsModule } from './modules/projects/projects.module';
+import { RolesModule } from './modules/roles/roles.module';
+import { TransfersModule } from './modules/transfers/transfers.module';
+import { UsersModule } from './modules/users/users.module';
+import { VehiclesModule } from './modules/vehicles/vehicles.module';
 
 @Module({
   imports: [
