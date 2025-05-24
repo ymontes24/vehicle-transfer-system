@@ -1,98 +1,192 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Vehicle Transfer System API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A Nest.js backend application that implements a CRUD module for managing vehicle transfers in a management system.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+- User authentication with JWT and secure cookies
+- Role-based access control system
+- Project and organizational unit based permissions
+- Complete CRUD operations for vehicle transfers
+- PostgreSQL database with TypeORM
+- Docker and docker-compose setup
+- API security with Helmet
+- Swagger UI API documentation
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Tech Stack
 
-## Project setup
+- Node.js
+- Nest.js
+- TypeScript
+- PostgreSQL
+- TypeORM
+- JWT Authentication
+- Docker & Docker Compose
+- Swagger / OpenAPI 
 
-```bash
-$ npm install
-```
+## Data Models
 
-## Compile and run the project
+- **User**: Manages user accounts with role-based access
+- **Role**: Contains sets of permissions
+- **Permission**: Defines allowed actions
+- **Project**: Top-level grouping of organizational units
+- **OrganizationalUnit**: Belongs to a project, contains users
+- **Vehicle**: Stores vehicle information
+- **Transfer**: Records vehicle transfers with relationships to other entities
 
-```bash
-# development
-$ npm run start
+## Installation
 
-# watch mode
-$ npm run start:dev
+### Prerequisites
 
-# production mode
-$ npm run start:prod
-```
+- Node.js (v18+)
+- npm or yarn
+- Docker and Docker Compose (for containerized setup)
+- PostgreSQL (if not using Docker)
 
-## Run tests
+### Environment Variables
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Copy the example environment file and configure your variables:
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+cp .env.example .env
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Edit the `.env` file with your specific configuration.
+### Running with Docker (Recommended)
 
-## Resources
+```bash
+# Build and start containers
+docker-compose up -d
 
-Check out a few resources that may come in handy when working with NestJS:
+# The API will be available at http://localhost:3000
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### Running Locally (without Docker)
 
-## Support
+```bash
+# Install dependencies
+npm install
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# Create a PostgreSQL database named 'vehicle_transfer_system'
 
-## Stay in touch
+# Run database migrations
+npm run typeorm:migration:run
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Start the application in development mode
+npm run start:dev
 
-## License
+# The API will be available at http://localhost:3000
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## API Endpoints
+
+### Authentication
+- `POST /auth/login` - Authenticate user and get JWT token (stored as HTTP-only cookie)
+  ```json
+  {
+    "email": "admin@example.com",
+    "password": "password123"
+  }
+  ```
+- `GET /auth/me` - Get current user profile (requires authentication)
+- `POST /auth/logout` - Logout and clear JWT cookie
+
+### Transfers
+
+- `GET /transfers` - Get transfers (filtered by user access)
+- `POST /transfers` - Create a new transfer
+- `GET /transfers/:id` - Get a specific transfer
+- `PUT /transfers/:id` - Update a transfer
+- `DELETE /transfers/:id` - Delete a transfer
+
+All endpoints require proper authentication and authorization based on the user's roles and permissions.
+
+## API Documentation
+
+The API is documented using Swagger UI. After starting the application, you can access the API documentation at:
+
+```
+http://localhost:3000/api/docs
+```
+
+Additionally, the API has been deployed online, and you can also view the documentation and test the endpoints at:
+
+```
+https://vehicle-transfer-system.onrender.com/api/docs
+```
+
+### Authentication
+
+All API endpoints (except login and register) require authentication. The application uses JWT tokens stored in HTTP-only cookies for secure authentication.
+
+#### Cookie-based Authentication
+
+The API uses secure cookie-based authentication instead of the traditional bearer token approach. When you log in through the `/auth/login` endpoint, the JWT token is automatically stored in an HTTP-only cookie, which provides better security against XSS attacks.
+
+##### How to authenticate in Swagger UI:
+
+1. First, use the `/auth/login` endpoint to log in, providing your email and password
+2. The API will set the JWT cookie automatically
+3. Swagger UI will include this cookie in subsequent requests
+4. All secured endpoints will now be accessible
+
+#### Available endpoints:
+
+- **POST /auth/login** - Authenticate and receive a JWT token in cookies
+- **GET /auth/me** - Get the current user's profile
+- **POST /auth/logout** - Logout and clear the JWT cookie
+
+### Transfers
+
+The main functionality of the API is managing vehicle transfers:
+
+- **GET /transfers** - Get a list of transfers with filtering options
+- **GET /transfers/:id** - Get a specific transfer by ID
+- **POST /transfers** - Create a new transfer
+- **PATCH /transfers/:id** - Update an existing transfer
+- **DELETE /transfers/:id** - Delete a transfer
+
+### Authorization
+
+The API implements a role-based access control system with the following permissions:
+
+- **view_transfers** - Allows viewing transfer records
+- **create_transfers** - Allows creating new transfers
+- **edit_transfers** - Allows editing existing transfers
+- **delete_transfers** - Allows deleting transfers
+
+Users are assigned roles with specific permissions, and also have access to specific projects and organizational units.
+
+## Authentication
+
+The system uses JWT tokens stored in secure cookies for authentication. 
+
+The tokens contain:
+- User ID
+- Username
+- Timestamp
+
+## Authentication Flow
+
+1. User logs in with email and password at `/auth/login`
+2. Server verifies credentials and returns user data
+3. JWT token is stored as an HTTP-only cookie
+4. Client includes this cookie in subsequent requests
+5. Protected endpoints verify the JWT token and user permissions
+
+## Access Control
+
+Access is controlled by:
+1. JWT validation
+2. Role-based permissions (view_transfers, create_transfers, etc.)
+3. Project and organizational unit access checks
+
+## Test Users
+
+The included init.sql file provides the following test users:
+
+| Username | Email               | Password    | Role     |
+|----------|---------------------|-------------|----------|
+| admin    | admin@example.com   | password123 | Admin    |
+| manager  | manager@example.com | password123 | Manager  |
+| operator | operator@example.com| password123 | Operator |
