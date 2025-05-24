@@ -11,6 +11,9 @@ export const databaseConfig: TypeOrmModuleOptions = {
     password: process.env.DB_PASSWORD || 'postgres',
     database: process.env.DB_DATABASE || 'vehicle_transfer_system',
     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-    synchronize: false, //process.env.NODE_ENV !== 'production',
+    synchronize: false,
     logging: process.env.NODE_ENV === 'development',
+    ssl: {
+        rejectUnauthorized: false,
+    }
 };

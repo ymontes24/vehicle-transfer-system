@@ -5,6 +5,7 @@ import { User } from '../../users/entities/user.entity';
 import { Project } from '../../projects/entities/project.entity';
 import { OrganizationalUnit } from '../../organizational-units/entities/organizational-unit.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 
 export enum TransferType {
   ACQUISITION = 'acquisition',
@@ -33,6 +34,7 @@ export class Transfer extends BaseEntity {
     example: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
     description: 'ID of the vehicle being transferred'
   })
+  @Exclude()
   @Column({ name: 'vehicle_id' })
   vehicleId: string;
 
@@ -49,6 +51,7 @@ export class Transfer extends BaseEntity {
     example: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
     description: 'ID of the client involved in the transfer'
   })
+  @Exclude()
   @Column({ name: 'client_id' })
   clientId: string;
 
@@ -65,6 +68,7 @@ export class Transfer extends BaseEntity {
     example: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
     description: 'ID of the transmitter (user executing the transfer)'
   })
+  @Exclude()
   @Column({ name: 'transmitter_id' })
   transmitterId: string;
 
@@ -81,6 +85,7 @@ export class Transfer extends BaseEntity {
     example: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
     description: 'ID of the project associated with this transfer'
   })
+  @Exclude()
   @Column({ name: 'project_id' })
   projectId: string;
 
@@ -97,6 +102,7 @@ export class Transfer extends BaseEntity {
     example: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
     description: 'ID of the organizational unit associated with this transfer'
   })
+  @Exclude()
   @Column({ name: 'organizational_unit_id' })
   organizationalUnitId: string;
 
