@@ -5,7 +5,8 @@ import { LoginDto } from './dto/login.dto';
 import { Public } from '../../common/decorators/public.decorator';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { User } from '../users/entities/user.entity';
-
+import { ApiTags, ApiOperation, ApiSecurity } from '@nestjs/swagger';
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) { }
@@ -13,6 +14,7 @@ export class AuthController {
     @Public()
     @Post('login')
     @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Login with email and password' })
     async login(@Body() loginDto: LoginDto, @Res({ passthrough: true }) response: Response) {
         const result = await this.authService.login(loginDto);
 
@@ -32,6 +34,8 @@ export class AuthController {
 
     @UseGuards(JwtAuthGuard)
     @Get('me')
+    @ApiOperation({ summary: 'Get the current user profile' })
+    @ApiSecurity('cookie-auth')
     async getProfile(@Req() req: Request & { user: User }) {
         return this.authService.getProfile(req.user);
     }
@@ -39,6 +43,8 @@ export class AuthController {
     @UseGuards(JwtAuthGuard)
     @Post('logout')
     @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Logout the current user' })
+    @ApiSecurity('cookie-auth')
     async logout(@Res({ passthrough: true }) response: Response) {
         response.clearCookie('jwt');
         return { message: 'Logout successful' };
