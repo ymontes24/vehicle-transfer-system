@@ -11,6 +11,7 @@ import { AuthService } from './auth.service';
 import { UsersModule } from '../users/users.module';
 import { User } from '../users/entities/user.entity';
 import * as dotenv from 'dotenv';
+import { OrganizationalUnitsModule } from '../organizational-units/organizational-units.module';
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ dotenv.config();
     }),
     TypeOrmModule.forFeature([User]),
     UsersModule,
+    OrganizationalUnitsModule   
   ],
   controllers: [AuthController],
   providers: [
@@ -30,7 +32,7 @@ dotenv.config();
     JwtStrategy,
     JwtAuthGuard,
     PermissionsGuard,
-    ProjectAccessGuard,
+    ProjectAccessGuard
   ],
   exports: [
     JwtModule,

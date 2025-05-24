@@ -12,9 +12,9 @@ export class User extends BaseEntity {
 
   @Column({ unique: true })
   email: string;
-
-  @Column({ name: 'password_hash' })
+  
   @Exclude()
+  @Column({ name: 'password_hash' })
   passwordHash: string;
 
   @ManyToMany(() => Role, role => role.users)

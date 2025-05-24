@@ -4,6 +4,7 @@ import { Vehicle } from '../../vehicles/entities/vehicle.entity';
 import { User } from '../../users/entities/user.entity';
 import { Project } from '../../projects/entities/project.entity';
 import { OrganizationalUnit } from '../../organizational-units/entities/organizational-unit.entity';
+import { Exclude } from 'class-transformer';
 
 export enum TransferType {
   ACQUISITION = 'acquisition',
@@ -22,6 +23,7 @@ export class Transfer extends BaseEntity {
   })
   type: TransferType;
 
+  @Exclude()
   @Column({ name: 'vehicle_id' })
   vehicleId: string;
 
@@ -29,6 +31,7 @@ export class Transfer extends BaseEntity {
   @JoinColumn({ name: 'vehicle_id' })
   vehicle: Vehicle;
 
+  @Exclude()
   @Column({ name: 'client_id' })
   clientId: string;
 
@@ -36,6 +39,7 @@ export class Transfer extends BaseEntity {
   @JoinColumn({ name: 'client_id' })
   client: User;
 
+  @Exclude()
   @Column({ name: 'transmitter_id' })
   transmitterId: string;
 
@@ -43,6 +47,7 @@ export class Transfer extends BaseEntity {
   @JoinColumn({ name: 'transmitter_id' })
   transmitter: User;
 
+  @Exclude()
   @Column({ name: 'project_id' })
   projectId: string;
 
@@ -50,6 +55,7 @@ export class Transfer extends BaseEntity {
   @JoinColumn({ name: 'project_id' })
   project: Project;
 
+  @Exclude()
   @Column({ name: 'organizational_unit_id' })
   organizationalUnitId: string;
 

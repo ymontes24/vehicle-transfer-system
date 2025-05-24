@@ -4,11 +4,7 @@ import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { Public } from '../../common/decorators/public.decorator';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
-
-// Create an interface to extend Express Request
-interface RequestWithUser extends Request {
-    user: any;
-}
+import { User } from '../users/entities/user.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -36,7 +32,7 @@ export class AuthController {
 
     @UseGuards(JwtAuthGuard)
     @Get('me')
-    async getProfile(@Req() req: RequestWithUser) {
+    async getProfile(@Req() req: Request & { user: User }) {
         return this.authService.getProfile(req.user);
     }
 
@@ -44,7 +40,6 @@ export class AuthController {
     @Post('logout')
     @HttpCode(HttpStatus.OK)
     async logout(@Res({ passthrough: true }) response: Response) {
-        // Clear the JWT cookie
         response.clearCookie('jwt');
         return { message: 'Logout successful' };
     }
